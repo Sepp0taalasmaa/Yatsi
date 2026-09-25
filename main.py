@@ -1,6 +1,6 @@
 import random
 
-
+pojot = 0
 kirja = ["Ykköset", "Kakkoset", "Kolmoset",
          "Neloset", "Viitoset", "Kuutoset"]
 nopat = [] 
@@ -15,5 +15,7 @@ for luku in range(1,7):
 
 for luku in nopat:
     if luku == 1:
-        print("DDDDDDDDDDDD")
-        
+        pojot += 1
+        print(pojot)
+with open("pöytäkirja.txt", "w") as tiedosto:
+    tiedosto.write(f"pelaaja1;{pojot}")
