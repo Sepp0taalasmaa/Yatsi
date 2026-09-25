@@ -1,1 +1,1 @@
-pelaaja1;1
+pelaaja1;0
