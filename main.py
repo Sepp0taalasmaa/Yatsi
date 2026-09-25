@@ -1,7 +1,6 @@
 import random
 
-#pelaajien_maara = int(input("Monta pelaajaa: "))
-#print(pelaajien_maara)
+
 kirja = ["Ykköset", "Kakkoset", "Kolmoset",
          "Neloset", "Viitoset", "Kuutoset"]
 nopat = [] 
@@ -14,3 +13,7 @@ for luku in range(1,7):
     pisteet = nopat.count(luku) * luku
     print(f"{kirja[luku -1]}: {pisteet}")
 
+for luku in nopat:
+    if luku == 1:
+        print("DDDDDDDDDDDD")
+        
