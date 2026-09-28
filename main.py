@@ -3,6 +3,9 @@ class Peli:
     def __init__(self):
         self.nopat = [0,0,0,0,0]
 
+    def heitot(self):
+        self.uudelleen = int(input("Montako uudelleen heittoa: "))
+        
     def heita_nopat(self, pidetyt):
         for i in range(5):
             if i not in pidetyt:
@@ -14,13 +17,13 @@ class Peli:
     def vuoro(self):
         pidetyt = []
 
-        for kierros in range(3):
+        for kierros in range(self.uudelleen):
             print(f"\nKierros {kierros + 1}")
 
             self.heita_nopat(pidetyt)
             self.nayta_nopat()
 
-            if kierros < 2:
+            if kierros < self.uudelleen-1:
                 syote = input("Mitkä nopat haluat pitää: ")
                 pidetyt = [int(x) - 1 for x in syote.split()]
 
@@ -31,25 +34,15 @@ class Peli:
                 pisteet += 1
         print(pisteet)
 
-    def kakkoset(self):
-        pisteet = 0
-        for i in self.nopat:
-            if i == 2:
-                pisteet += 2
-        print(pisteet)
 
 
-                
 
-
-        
-
-    
 if __name__ == "__main__":
     peli = Peli()
+    peli.heitot()
     peli.vuoro()
     peli.ykkoset()
-    peli.kakkoset()
+
 
     
 
