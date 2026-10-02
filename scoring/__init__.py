@@ -1,0 +1,1 @@
+"""Scoring rules for Yatsi categories."""
