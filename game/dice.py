@@ -9,5 +9,9 @@ class Dice:
 			raise ValueError
 		else:
 			for i in range(5):
-				if d[i] == 1:
+				if d[i] == "1":
 					self.vals[i] = randint(1,6)
+				elif d[i] == "0":
+					pass
+				else:
+					raise ValueError
