@@ -7,7 +7,7 @@ class Scorecard:
 			"4s":None,
 			"5s":None,
 			"6s":None,
-			"bonus":None,
+			"bonus":0,
 			"pair":None,
 			"2pair":None,
 			"3oak":None,
@@ -115,6 +115,14 @@ class Scorecard:
 			except TypeError:
 				pass
 		return r
+
+	def sheetFull(self) -> bool:
+		r = True
+		for x, y in self.scores.items():
+			if y == None:
+				r = False
+		return r
+
 
 	def printScores(self) -> None:
 		print("Ykköset:", self.scores["1s"])
