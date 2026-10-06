@@ -93,4 +93,4 @@ class Scorecard:
 		if self.scores["misc"] == None:
 			r.append("Sattuma")
 
-		return r
+		return [r, n] #yhdistelmät [0] ja noppien määrät [1]

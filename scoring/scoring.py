@@ -1,1 +1,0 @@
-"""Pure scoring functions for dice combinations."""
