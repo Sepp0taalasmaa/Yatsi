@@ -7,6 +7,7 @@ class Scorecard:
 			"4s":None,
 			"5s":None,
 			"6s":None,
+			"bonus":0,
 			"pair":None,
 			"2pair":None,
 			"3oak":None,
@@ -93,4 +94,55 @@ class Scorecard:
 		if self.scores["misc"] == None:
 			r.append("Sattuma")
 
+		return [r, n] #yhdistelmät [0] ja noppien määrät [1]
+
+	@property
+	def summa(self) -> int:
+		r = 0
+		for x, y in self.scores.items():
+			try:
+				r += y
+			except TypeError:
+				pass
 		return r
+
+	@property
+	def vsumma(self) -> int:
+		r = 0
+		for i in range(6):
+			try:
+				r += self.scores[f"{i+1}s"]
+			except TypeError:
+				pass
+		return r
+
+	def sheetFull(self) -> bool:
+		r = True
+		for x, y in self.scores.items():
+			if y == None:
+				r = False
+		return r
+
+
+	def printScores(self) -> None:
+		print("Ykköset:", self.scores["1s"])
+		print("Kakkoset:", self.scores["2s"])
+		print("Kolmoset:", self.scores["3s"])
+		print("Neloset:", self.scores["4s"])
+		print("Viitoset:", self.scores["5s"])
+		print("Kuutoset:", self.scores["6s"])
+
+		print("Välisumma:", self.vsumma)
+		print("Bonus:", bool(self.scores["bonus"]))
+		
+		print("Pari:", self.scores["pair"])
+		print("Kaksi paria:", self.scores["2pair"])
+		print("Kolmoisluku:", self.scores["3oak"])
+		print("Neloisluku:", self.scores["4oak"])
+		print("Pieni suora:", self.scores["1-5"])
+		print("Suuri suora:", self.scores["2-6"])
+		print("Täyskäsi:", self.scores["FullH"])
+		print("Sattuma:", self.scores["misc"])
+		print("Yatzy:", self.scores["yatzy"])
+
+		print("Summa:", self.summa)
