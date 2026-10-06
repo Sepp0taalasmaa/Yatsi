@@ -55,3 +55,10 @@ class Scoring:
 						raise ValueError
 		else:
 			raise ValueError
+
+		try:
+			if scard.scores["bonus"] == None:
+				if scard.vsumma >= 63:
+					scard.scores["bonus"] = 50
+		except TypeError:
+			pass
