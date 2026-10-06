@@ -10,7 +10,7 @@ class UI:
             print("=" * 40)
             print("                 YATZY")
             print("=" * 40)
-            print("Pelaaja:", Player.nimi)
 
+            
+print("Pelaaja:", Player.nimi)
 
-    
