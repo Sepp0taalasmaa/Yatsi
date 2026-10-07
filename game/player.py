@@ -12,6 +12,6 @@ class Player:
     @property
     def scorecard(self):
         return self._scorecard
-
+    
     def total_score(self):
         return self._scorecard.scores
