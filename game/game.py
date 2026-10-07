@@ -10,6 +10,9 @@ if TYPE_CHECKING:
 
 class Game:
 	def __init__(self, players: list[Player]) -> None:
+		print("Pelaajat:")
+		for player in players:
+			print(f"- {player.nimi}")
 		# TODO: Validate players and initialize dice, turn, and roll state.
 		raise NotImplementedError
 
