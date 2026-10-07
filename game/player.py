@@ -1,4 +1,4 @@
-from scorecard import Scorecard
+from game.scorecard import Scorecard
 
 class Player:
     def __init__(self, nimi):
