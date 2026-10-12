@@ -13,6 +13,8 @@ class Game:
 			print(f"- {player.nimi}")
 		self.dice = Dice()
 		print(self.dice.vals)
+		self.turn = 0
+		self.rolls = 0
 		# TODO: Validate players and initialize dice, turn, and roll state.
 
 
