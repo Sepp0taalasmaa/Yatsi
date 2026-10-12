@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-	from game.player import Player
+from game.dice import Dice
+from game.player import Player
 
 
 class Game:
@@ -13,8 +11,10 @@ class Game:
 		print("Pelaajat:")
 		for player in players:
 			print(f"- {player.nimi}")
+		self.dice = Dice()
+		print(self.dice.vals)
 		# TODO: Validate players and initialize dice, turn, and roll state.
-		raise NotImplementedError
+
 
 	@property
 	def current_player(self) -> Player:
