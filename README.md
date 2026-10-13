@@ -88,6 +88,25 @@ Aja projektin testit projektin juurikansiosta komennolla:
 python3 -m unittest discover -s tests
 ```
 
+Voit ajaa myös vain osan testeistä:
+
+```bash
+# Yksi testitiedosto
+python3 -m unittest tests.test_dice
+
+# Yksi testiluokka
+python3 -m unittest tests.test_game.GameTests
+
+# Yksi testi
+python3 -m unittest tests.test_game.GameTests.test_rolls_all_dice_and_counts_roll
+
+# Testit, joiden nimestä löytyy "roll"
+python3 -m unittest discover -s tests -k roll
+```
+
+Vaihda moduulin, luokan tai testin nimi siihen toimintoon, jota haluat testata.
+`-k`-valinta rajaa testit testimetodin nimen perusteella.
+
 ## Työnjako
 
 Valtteri voi toteuttaa käyttöliittymän ja Eeli pöytäkirjaluokan sekä moduulit. Muista luokista tai moduuleista voi sopia päivittämällä README:tä tai Teams-viestillä. Noppaluokan voi toteuttaa halutessaan.
