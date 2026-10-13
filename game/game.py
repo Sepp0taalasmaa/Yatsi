@@ -20,8 +20,10 @@ class Game:
 
 	@property
 	def current_player(self) -> Player:
+		return "A"
+
 		# TODO: Return the player whose turn it is.
-		raise NotImplementedError
+
 
 	def roll_dice(self, mask: str = "11111") -> list[int]:
 		# TODO: Roll selected dice and reject a fourth roll in the same turn.
