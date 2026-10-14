@@ -26,9 +26,6 @@ class Game:
 	def current_player(self) -> Player:
 		return self.players[self.turn]
 
-		# TODO: Return the player whose turn it is.
-
-
 	def roll_dice(self, mask: str = "11111") -> list[int]:
 		if self.rolls >= 3:
 			raise ValueError("A player can roll at most three times per turn.")
@@ -44,7 +41,6 @@ class Game:
 		return points
 
 	def is_finished(self) -> bool:
-		# TODO: Return whether every player's scorecard is complete.
 		for player in self.players:
 			if not player.scorecard.sheetFull():
 				return False

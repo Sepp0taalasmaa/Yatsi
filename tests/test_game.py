@@ -14,7 +14,7 @@ class GameTests(unittest.TestCase):
         self.players = [Player("Matti"), Player("Maija")]
         for player in self.players:
             player._scorecard = Mock()
-            player.scorecard.is_complete.return_value = False
+            player.scorecard.sheetFull.return_value = False
         # Game tulostaa alustuksessa; tuloste ei kuulu näiden testien tarkistukseen.
         self.print_patch = patch("builtins.print")
         self.print_patch.start()
@@ -112,13 +112,13 @@ class GameTests(unittest.TestCase):
 
     def test_one_complete_scorecard_does_not_finish_game(self):
         # Yhden pelaajan valmis taulukko ei päätä muiden peliä.
-        self.players[0].scorecard.is_complete.return_value = True
+        self.players[0].scorecard.sheetFull.return_value = True
         self.assertFalse(self.game.is_finished())
 
     def test_all_complete_scorecards_finish_game(self):
         # Peli päättyy vasta, kun kaikkien pelaajien taulukot ovat valmiit.
         for player in self.players:
-            player.scorecard.is_complete.return_value = True
+            player.scorecard.sheetFull.return_value = True
         self.assertTrue(self.game.is_finished())
 
     def test_no_winners_before_game_finishes(self):
@@ -127,14 +127,14 @@ class GameTests(unittest.TestCase):
     def test_highest_scoring_player_wins(self):
         # Kokonaispisteet määräävät voittajan.
         for player, score in zip(self.players, [100, 150]):
-            player.scorecard.is_complete.return_value = True
+            player.scorecard.sheetFull.return_value = True
             player.total_score = Mock(return_value=score)
         self.assertEqual(self.game.winners(), [self.players[1]])
 
     def test_tied_players_both_win(self):
         # Tasapisteissä voittajalistaan kuuluvat kaikki tasatuloksen jakavat.
         for player in self.players:
-            player.scorecard.is_complete.return_value = True
+            player.scorecard.sheetFull.return_value = True
             player.total_score = Mock(return_value=150)
         self.assertCountEqual(self.game.winners(), self.players)
 

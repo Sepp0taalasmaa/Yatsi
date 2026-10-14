@@ -75,14 +75,14 @@ class ScorecardTests(unittest.TestCase):
 
         self.assertEqual(self.scorecard.total(), 120)
 
-    def test_scorecard_is_complete_only_after_all_categories_are_recorded(self):
-        self.assertFalse(self.scorecard.is_complete())
+    def test_scorecard_sheetFull_only_after_all_categories_are_recorded(self):
+        self.assertFalse(self.scorecard.sheetFull())
 
         # Nollakin on käytetty pistemäärä, joten kaikki kategoriat voidaan täyttää.
         for category in CATEGORIES:
             self.scorecard.record(category, 0)
 
-        self.assertTrue(self.scorecard.is_complete())
+        self.assertTrue(self.scorecard.sheetFull())
 
 
 if __name__ == "__main__":

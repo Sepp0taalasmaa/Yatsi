@@ -101,12 +101,6 @@ class Scorecard:
 				total_points += value
 		return total_points + self.upper_bonus()
 
-	def is_complete(self) -> bool:
-		for category in CATEGORIES:
-			if self.get_score(category) is None:
-				return False
-		return True
-
 	# Legacy compatibility helpers used by the current UI and older code.
 	def validHands(self, dice: list[int]) -> list:
 		counts = Counter(dice)
@@ -126,7 +120,10 @@ class Scorecard:
 		return self.total()
 
 	def sheetFull(self) -> bool:
-		return self.is_complete()
+		for category in CATEGORIES:
+			if self.get_score(category) is None:
+				return False
+		return True
 
 	def printScores(self) -> None:
 		for category in CATEGORIES:
