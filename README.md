@@ -146,7 +146,7 @@ sequenceDiagram
 
 Alla on sovittu rajapinta moduulien toteutuksille. `list[int]` tarkoittaa tässä viiden nopan arvoja väliltä 1–6. Pelilogiikka, nopat ja pistelasku eivät tulosta ruudulle tai kysy käyttäjältä syötteitä; siitä vastaa käyttöliittymä.
 
-Kategorioiden nimet ovat `Ykköset`, `Kakkoset`, `Kolmoset`, `Neloset`, `Viitoset`, `Kuutoset`, `Pari`, `Kaksi paria`, `Kolme samaa`, `Neljä samaa`, `Pieni suora`, `Suuri suora`, `Täyskäsi`, `Sattuma` ja `Yazy`. Pistelasku ja pistetaulukko käyttävät samoja nimiä.
+Kategorioiden nimet ovat `Ykköset` ("1s"), `Kakkoset` ("2s"), `Kolmoset` ("3s"), `Neloset` ("4s"), `Viitoset` ("5s"), `Kuutoset` ("6s"), `Pari` ("pair"), `Kaksi paria` ("2pair"), `Kolmoisluku` ("3oak"), `Neloisluku` ("4oak"), `Pieni suora` ("1-5"), `Suuri suora` ("2-6"), `Täyskäsi` ("FullH"), `Sattuma` ("misc") ja `Yatzy` ("yatzy").
 
 ### `game/dice.py`
 
@@ -174,12 +174,12 @@ Pistetaulukko tallentaa yhden pelaajan kategoriapisteet. Kategoriaa voi käyttä
 | Metodi | Syöte | Palauttaa ja tekee |
 | --- | --- | --- |
 | `available_categories()` | Ei syötettä | Vielä käyttämättömät kategoriat (`list[str]`). |
-| `get_score(category)` | Kategorian nimi (`str`) | Pisteet (`int`) tai `None`, jos kategoriaa ei ole vielä käytetty. |
+| `scores["---"]` | Kategorian ID | Pisteet (`int`) tai `None`, jos kategoriaa ei ole vielä käytetty. |
 | `record(category, points)` | Kategorian nimi (`str`) ja pisteet (`int`) | `None`; tallentaa pisteet. Tuntemattomasta tai jo käytetystä kategoriasta nostaa `ValueError`. |
-| `upper_total()` | Ei syötettä | Yläosan pisteiden summan (`int`). |
-| `upper_bonus()` | Ei syötettä | Yläosan bonuksen (`int`), nolla jos sovittu bonusraja ei täyty. |
-| `total()` | Ei syötettä | Kokonaispisteet (`int`), yläosan bonus mukaan lukien. |
-| `is_complete()` | Ei syötettä | `True`, kun kaikki kategoriat on käytetty, muuten `False`. |
+| `vsumma` | Ei syötettä | Yläosan pisteiden summan (`int`). |
+| `scores["bonus"]` | Ei syötettä | Yläosan bonuksen (`int`), nolla jos sovittu bonusraja ei täyty. |
+| `summa` | Ei syötettä | Kokonaispisteet (`int`), yläosan bonus mukaan lukien. |
+| `sheetFull()` | Ei syötettä | `True`, kun kaikki kategoriat on käytetty, muuten `False`. |
 
 ### `game/player.py`
 
