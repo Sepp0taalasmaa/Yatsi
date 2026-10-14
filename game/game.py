@@ -20,7 +20,7 @@ class Game:
 
 	@property
 	def current_player(self) -> Player:
-		return ("Aaaa")
+		return self.players[self.turn]
 
 		# TODO: Return the player whose turn it is.
 
@@ -35,14 +35,10 @@ class Game:
 
 	def is_finished(self) -> bool:
 		# TODO: Return whether every player's scorecard is complete.
-<<<<<<< Updated upstream
 		for player in self.players:
 			if not player.scorecard.sheetFull():
 				return False
 		return True
-=======
-		raise NotImplementedError
->>>>>>> Stashed changes
 
 	def winners(self) -> list[Player]:
 		# TODO: Return all highest-scoring players after the game is complete.
