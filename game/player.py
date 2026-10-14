@@ -1,5 +1,6 @@
 from game.scorecard import Scorecard
 
+
 class Player:
     def __init__(self, nimi):
         self._nimi = nimi
@@ -10,8 +11,12 @@ class Player:
         return self._nimi
 
     @property
+    def name(self):
+        return self._nimi
+
+    @property
     def scorecard(self):
         return self._scorecard
-    
+
     def total_score(self):
-        return self._scorecard.scores
+        return self._scorecard.total()

@@ -142,6 +142,16 @@ sequenceDiagram
     Game-->>UI: voittaja(t)
 ```
 
+### Arkkitehtuurikommentti
+
+Vastuunjako pidetaan selkeana seuraavasti:
+- UI lukee syotteet ja nayttaa tilanteen.
+- Game orkestroi vuoron kulun ja paattaa milloin pisteet kirjataan.
+- Scoring laskee pisteet vain annetusta kategoriasta ja nopista eika muuta pelitilaa.
+- Scorecard tallentaa pisteet, hallitsee kaytetyt kategoriat ja laskee bonuksen.
+
+Scorecardia muokataan vain Game.finish_turn-vaiheessa, kun pelaaja on valinnut kategorian ja Scoring on palauttanut pistemaaran. Muissa vaiheissa pisteita ei kirjoiteta scorecardiin.
+
 ## Moduulien rajapinnat
 
 Alla on sovittu rajapinta moduulien toteutuksille. `list[int]` tarkoittaa tässä viiden nopan arvoja väliltä 1–6. Pelilogiikka, nopat ja pistelasku eivät tulosta ruudulle tai kysy käyttäjältä syötteitä; siitä vastaa käyttöliittymä.
