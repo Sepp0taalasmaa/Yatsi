@@ -8,6 +8,7 @@ from game.player import Player
 
 class Game:
 	def __init__(self, players: list[Player]) -> None:
+		self.players = players
 		print("Pelaajat:")
 		for player in players:
 			print(f"- {player.nimi}")
@@ -20,8 +21,10 @@ class Game:
 
 	@property
 	def current_player(self) -> Player:
+		return "A"
+
 		# TODO: Return the player whose turn it is.
-		raise NotImplementedError
+
 
 	def roll_dice(self, mask: str = "11111") -> list[int]:
 		# TODO: Roll selected dice and reject a fourth roll in the same turn.
@@ -33,7 +36,10 @@ class Game:
 
 	def is_finished(self) -> bool:
 		# TODO: Return whether every player's scorecard is complete.
-		raise NotImplementedError
+		for player in self.players:
+			if not player.scorecard.is_complete():
+				return False
+		return True
 
 	def winners(self) -> list[Player]:
 		# TODO: Return all highest-scoring players after the game is complete.
