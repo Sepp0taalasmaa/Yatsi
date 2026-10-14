@@ -12,6 +12,136 @@ ui/                     Komentorivikäyttöliittymä
 tests/                  Automaattiset testit
 ```
 
+## Arkkitehtuuri ja kaaviot
+
+### Moduuliriippuvuudet
+
+```mermaid
+flowchart LR
+	M[main.py] --> G[game.game]
+	M --> P[game.player]
+	M --> UI[ui.console_ui]
+
+	G --> D[game.dice]
+	G --> P
+
+	P --> SC[game.scorecard]
+
+	S[scoring.scoring] -. pisteytyslogiikka .-> G
+	S -. pisteytyslogiikka .-> SC
+
+	T1[tests.test_dice] --> D
+	T2[tests.test_game] --> G
+	T2 --> D
+	T2 --> P
+	T3[tests.test_scorecard] --> SC
+	T4[tests.test_scoring] --> S
+```
+
+### Toteutustila (T/O/S)
+
+Merkinnat:
+- T = toteutettu
+- O = osittain toteutettu
+- S = suunniteltu
+
+```mermaid
+flowchart TD
+	M[main.py T] --> G[game.game O]
+	M --> P[game.player O]
+	M --> UI[ui.console_ui O]
+
+	G --> D[game.dice T]
+	G --> S[scoring.scoring S]
+
+	P --> SC[game.scorecard T]
+
+	UI --> G
+	UI --> P
+	UI --> SC
+	UI --> D
+
+	TD[tests.test_dice] --> D
+	TG[tests.test_game] --> G
+	TS[tests.test_scorecard] --> SC
+	TSC[tests.test_scoring] --> S
+```
+
+### Tavoitetilan ajovirta
+
+```mermaid
+flowchart TD
+    A[Kaynnistys main] --> B[Pelaajien luonti]
+    B --> C[Game olion alustus]
+    C --> D[UI run game]
+
+    subgraph Vuoron_kulku
+        D --> E[Hae current_player]
+        E --> F[roll_dice enintaan 3 kertaa]
+        F --> G[Dice roll mask]
+        G --> H[Palauta noppa arvot UI lle]
+        H --> I[Hae valittavat kategoriat]
+        I --> J[Kayttaja valitsee kategorian]
+        J --> K[finish_turn category]
+        K --> L[Scoring calculate category dice]
+        L --> M[Tallenna pisteet scorecardiin]
+        M --> N[Siirra vuoro seuraavalle]
+    end
+
+    N --> O{Onko peli valmis}
+    O -- ei --> E
+    O -- kylla --> P[Hae winners]
+    P --> Q[Nayta tulokset]
+
+    subgraph Tavoitetilan_rajapinnat
+        R[Game current_player roll_dice finish_turn is_finished winners]
+        S2[Scorecard kategoriat tallennus summat valmis]
+        T[Scoring calculate kaikille kategorioille]
+        U[UI syotteet validointi tulostus]
+    end
+
+    K -. kayttaa .-> R
+    M -. kayttaa .-> S2
+    L -. kayttaa .-> T
+    D -. orkestroi .-> U
+```
+### Sekvenssikaavio
+```mermaid
+sequenceDiagram
+    participant User as Kayttaja
+    participant Main as main
+    participant UI as ui.console_ui
+    participant Game as game.game
+    participant Dice as game.dice
+    participant Player as game.player
+    participant Card as game.scorecard
+    participant Scoring as scoring.scoring
+
+    User->>Main: kaynnistaa pelin
+    Main->>Main: luo pelaajat
+    Main->>Game: luo peli(player-listalla)
+    Main->>UI: run(game)
+
+    loop jokainen vuoro
+        UI->>Game: current_player
+        UI->>Game: roll_dice(mask)
+        Game->>Dice: roll(mask)
+        Dice-->>Game: noppa-arvot
+        Game-->>UI: noppa-arvot
+
+        UI->>Player: scorecard
+        UI->>Card: validit kategoriat / nayta kortti
+
+        UI->>Game: finish_turn(kategoria)
+        Game->>Scoring: calculate(kategoria, nopat)
+        Scoring-->>Game: pisteet
+        Game->>Card: tallenna pisteet
+    end
+
+    UI->>Game: winners()
+    Game-->>UI: voittaja(t)
+```
+
 ## Moduulien rajapinnat
 
 Alla on sovittu rajapinta moduulien toteutuksille. `list[int]` tarkoittaa tässä viiden nopan arvoja väliltä 1–6. Pelilogiikka, nopat ja pistelasku eivät tulosta ruudulle tai kysy käyttäjältä syötteitä; siitä vastaa käyttöliittymä.
