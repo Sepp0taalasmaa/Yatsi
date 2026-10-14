@@ -37,7 +37,7 @@ class Game:
 	def is_finished(self) -> bool:
 		# TODO: Return whether every player's scorecard is complete.
 		for player in self.players:
-			if not player.scorecard.is_complete():
+			if not player.scorecard.sheetFull():
 				return False
 		return True
 
